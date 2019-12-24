@@ -1,0 +1,51 @@
+
+.brewArea{
+}
+
+.ing-text{
+    font-weight: 500;
+}
+
+#coffee-text{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#selectArea{
+    max-height: 215px;
+}
+
+#brewList{
+    box-sizing: border-box;
+    max-height: 350px;
+    position: relative;
+    overflow-y: scroll; 
+}
+
+.noError{
+    background-color: inherit;
+    color: inherit;
+}
+
+.yesError{
+    background-color: red;
+    color: red;
+}
+
+
+@media only screen and (max-width: 990px){
+    h3{
+        font-size: 20px;
+    }
+    .input-group-text{
+        font-size: 12px;
+        display: none;
+    }
+    #coffee-num{
+        height: 38px;
+        padding-right: 15px ;
+        padding-left: 10px;
+    }
+    
+   
+}

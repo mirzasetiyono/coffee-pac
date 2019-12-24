@@ -1,0 +1,149 @@
+.ing-height{
+    height: 200px !important;
+}
+
+.ing-button-container{
+    padding: 0;
+    right: 3%;
+}
+
+.ing-container{
+    width: 100px;
+    height: 203px;
+    position: relative;
+    left: 20%;
+    right: 20%;
+    border: black 1px solid;
+}
+
+.ing-name-container{
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1em;
+    margin-top: 2%;
+}
+
+.ing-max-text{
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.add-ing-button{
+    width: inherit;
+    height: 40px;
+    margin-bottom: 14%;
+}
+
+.ing-volume{
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.volume-warning{
+    font-size: 20px;
+    font-weight: 600;
+    color: red;
+}
+
+#coffee-ing{
+    background-color: #594a4e;
+    opacity: 1.0;
+    position: absolute;
+    height: 2px;
+    width: 98px;
+}
+#milk-ing{
+    background-color: #FFF4E4;
+    opacity: 1.0;
+    position: absolute;
+    height: 2px;
+    width: 98px;
+}
+#water-ing{
+    background-color: #D3F4FF;
+    opacity: 1.0;
+    position: absolute;
+    height: 2px;
+    width: 98px;
+}
+#chocolate-ing{
+    background-color: #A35638;
+    opacity: 1.0;
+    position: absolute;
+    height: 2px;
+    width: 98px;
+}
+
+#continue-btn{
+    position: absolute;
+    width: 115px;
+    height: 50px;
+}
+
+#continue-message{
+    position: relative;
+    left: 25%;
+    font-size: 25px;
+}
+
+#continue-row{
+    height: 0px !important;
+    margin-bottom: 67.5px !important;
+}
+
+.mobile-width{
+    visibility: hidden;
+    height: 0vh;
+}
+
+@media only screen and (max-width: 990px){
+    .mobile-width{
+    visibility: visible;
+    height: auto;
+    }
+    .desktop-width{
+    display: none;
+    }
+    .ing-container{
+    width: 35px;
+    }
+    .add-ing-button{
+    width:  60px;
+    height: 46px;
+    }
+    .ing-name-container{
+    font-size: 20px;
+    margin-top: 10px;
+    }
+    .ing-max-text{
+    font-size: 13px;
+    width: 100px;
+    }
+    .volume-warning{
+    font-size: 13px;
+    }
+    .ing-volume{
+    font-size: 13px;
+    }
+
+
+    #milk-ing{
+        width: 32px;
+    }
+    #coffee-ing{
+        width: 32px;
+    }
+    #water-ing{
+        width: 32px;
+    }
+    #chocolate-ing{
+        width: 32px;
+    }
+
+
+}
+   
+
+
+
+

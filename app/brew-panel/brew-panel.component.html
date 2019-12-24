@@ -1,0 +1,81 @@
+<div class="container-fluid mb-3 border border-bottom border-dark">
+    <div class="row justify-content-center text-center">
+        <h2>BREWING AREA</h2>
+    </div>
+</div>
+
+<div class="container brewArea desktop-width">
+    <div class="row">
+        <!-- Left side brew area -->
+        <div class="col-sm-5 border border-dark" id="selectArea">
+            <div class="row text-center justify-content-center mt-2">
+                <h3>Select Coffee</h3>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="coffee-select">Pick Coffee</label>
+                        </div>
+                        <select class="custom-select" [(ngModel)]="selectedCoffee" name="selectedCoffee"
+                            id="coffee-select">
+                            <option value="" disabled selected hidden>Pick Coffee</option>
+                            <option value="ESPRESSO">Espresso</option>
+                            <option value="LATTE">Latte</option>
+                            <option value="AMERICANO">Americano</option>
+                            <option value="MOCHA">Mocha</option>
+                            <option value="FLATWHITE">Flat White</option>
+                            <option value="CAPUCCINO">Capuccino</option>
+                            <option value="LONG BLACK">Long Black</option>
+                            <option value="NOISETTE">Noisette</option>
+                            <option value="MARACHINO">Marocchino</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="coffee-num">Cup</label>
+                        </div>
+                        <select class="custom-select" [style.color]="isError ? 'errortrue' : 'errorfalse'" [(ngModel)]="selectedQuantity"
+                            name="selectedQuantity" id="coffee-num">
+                            <option value="0" selected disabled hidden>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div *ngIf="!brewing else brewingProcess" class="row text-center justify-content-center mb-2">
+                <button class="btn btn-outline-dark btn-lg" (click)="brewCoffee()" [disabled]="finishedBrewing">Brew
+                    Coffee</button>
+            </div>
+            <ng-template #brewingProcess>
+                <h3 class="text-center">Brewing...</h3>
+            </ng-template>
+        </div>
+        <!-- right side brew area -->
+        <div class="col-sm-6 offset-sm-1 brewArea border border-dark">
+            <div class="row text-center justify-content-center mt-2">
+                <h3>Brew List & Ingredients Used</h3>
+            </div>
+            <ul class="list-group mb-2" id="brewList">
+                <li class="list-group-item" *ngFor="let list of brewList">
+                    <span id="coffee-text">{{list.coffee}} {{list.quantity}} cup(s)</span> <br>
+                    <span class="ing-text">Coffee : {{list.coffeeUsed}} ml</span> <br>
+                    <span class="ing-text">Milk (foamed) : {{list.foamedMilkUsed}} ml</span> <br>
+                    <span class="ing-text">Milk (steamed) : {{list.steamedMilkUsed}} ml</span> <br>
+                    <span class="ing-text">Water : {{list.waterUsed}} ml</span> <br>
+                    <span class="ing-text">Chocolate : {{list.chocolateUsed}} ml</span> <br>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+ 
+

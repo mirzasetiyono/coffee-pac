@@ -1,0 +1,239 @@
+<div class="container-fluid mb-3 border border-bottom border-dark">
+    <div class="row text-center content-center justify-content-center">
+        <h2 *ngIf="!finishedChoosing">FILL INGREDIENTS</h2>
+        <h2 *ngIf="finishedChoosing">CURRENT INGREDIENTS</h2>
+    </div>
+</div>
+
+<div class="container mt-3 desktop-width">
+    <div class="row mt-1">
+        <div class="col-md-2 ing-height">
+            <div class="ing-container d-flex align-items-center justify-content-center">
+                <div [style.height.px]="coffeeHeight" class="align-self-end" id="coffee-ing"></div>
+                <span class="coffee-responsive"></span>
+                <span class="position-absolute ing-volume">{{ coffeeIngredients }} ml </span> <br>
+                <span class="volume-warning position-absolute mt-4" [style.opacity]="coffeeAlert ? shown : hide"
+                    *ngIf="coffeeFull">FULL</span>
+            </div>
+        </div>
+        <div class="col-md-1 ing-height ing-button-container">
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableCoffeeBtn" (click)="coffeeAdd5()" > 
+                + 5 
+            </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableCoffeeBtn" (click)="coffeeAdd50()">
+                 + 50 
+                </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableCoffeeBtn" (click)="coffeeAdd100()">
+                + 100 
+            </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableCoffeeBtn" (click)="coffeeReset()">
+                Reset 
+            </button>
+        </div>
+
+        <div class="col-md-2 ing-height">
+            <div class="ing-container d-flex align-items-center justify-content-center">
+                <div [style.height.px]="milkHeight" class="align-self-end" id="milk-ing"></div>
+                <span class="milk-responsive"></span>
+                <span class="position-absolute ing-volume"> {{ milkIngredients }} ml </span>
+                <span class="volume-warning position-absolute mt-4" [style.opacity]="milkAlert ? shown : hide"
+                    *ngIf="milkFull">FULL</span>
+            </div>
+        </div>
+        <div class="col-md-1 ing-height ing-button-container">
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableMilkBtn" (click)="milkAdd5()">
+                 + 5
+            </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableMilkBtn" (click)="milkAdd50()">
+                 + 50
+            </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableMilkBtn" (click)="milkAdd100()">
+                 + 100 </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableMilkBtn" (click)="milkReset()">
+                 Reset
+            </button>
+        </div>
+
+        <div class="col-md-2 ing-height">
+            <div class="ing-container d-flex align-items-center justify-content-center">
+                <div [style.height.px]="waterHeight" class="align-self-end" id="water-ing"></div>
+                <span class="water-responsive"></span>
+                <span class="position-absolute ing-volume"> {{ waterIngredients }} ml </span>
+                <span class="volume-warning position-absolute mt-4" [style.opacity]="waterAlert ? shown : hide"
+                    *ngIf="waterFull">FULL</span>
+            </div>
+        </div>
+        <div class="col-md-1 ing-height ing-button-container">
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableWaterBtn" (click)="waterAdd5()">
+                 + 5
+            </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableWaterBtn" (click)="waterAdd50()">
+                 + 50 
+                </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableWaterBtn" (click)="waterAdd100()"> 
+                + 100 </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableWaterBtn" (click)="waterReset()">
+                Reset </button>
+        </div>
+
+        <div class="col-md-2 ing-height">
+            <div class="ing-container d-flex align-items-center justify-content-center">
+                <div [style.height.px]="chocolateHeight" class="align-self-end" id="chocolate-ing"></div>
+                <span class="chocolate-responsive"></span>
+                <span class="position-absolute ing-volume"> {{ chocolateIngredients }} ml </span>
+                <span class="volume-warning position-absolute mt-4" [style.opacity]="chocolateAlert ? shown : hide"
+                    *ngIf="chocolateFull">FULL</span>
+            </div>
+        </div>
+        <div class="col-md-1 ing-height ing-button-container">
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableChocolateBtn"
+                (click)="chocolateAdd5()"> + 5 </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableChocolateBtn"
+                (click)="chocolateAdd50()"> + 50 </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableChocolateBtn"
+                (click)="chocolateAdd100()"> + 100 </button>
+            <button class="add-ing-button btn btn-outline-dark" [disabled]="disableChocolateBtn"
+                (click)="chocolateReset()"> Reset </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="ing-name-container text-center">COFFEE <br> <span class="ing-max-text">(max. 1000 ml)</span>
+            </div>
+        </div>
+        <div class="col-md-2 offset-md-1">
+            <div class="ing-name-container text-center">MILK <br> <span class="ing-max-text">(max. 1000 ml)</span></div>
+        </div>
+        <div class="col-md-2 offset-md-1">
+            <div class="ing-name-container text-center">WATER <br> <span class="ing-max-text">(max. 500 ml)</span></div>
+        </div>
+        <div class="col-md-2 offset-md-1">
+            <div class="ing-name-container text-center">CHOCOLATE <br> <span class="ing-max-text">(max. 300 ml)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3" id="continue-row">
+        <button class="btn btn-light btn-outline-dark btn-lg" (click)="applyIng()" id="continue-btn" [disabled]="finishedChoosing">Continue</button>
+        <p id="continue-message" *ngIf="showSuggest"> <span id="arrow-prop">&#8592;</span>Ingredients looks good, Start Brewing</p>
+    </div>
+</div>
+
+<!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH -->
+<!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH -->
+<!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH -->
+
+<div class="container mt-3 mobile-width"> 
+        <div class="row mt-1">
+            <div class="col-sm-2 ing-height">
+                <div class="ing-container d-flex align-items-center justify-content-center">
+                    <div [style.height.px]="coffeeHeight" class="align-self-end" id="coffee-ing"></div>
+                    <span class="coffee-responsive"></span>
+                    <span class="position-absolute ing-volume">{{ coffeeIngredients }}</span> <br>
+                    <span class="volume-warning position-absolute mt-4" [style.opacity]="coffeeAlert ? shown : hide"
+                        *ngIf="coffeeFull">FULL</span>
+                </div>
+            </div>
+            <div class="col-sm-1 ing-height ing-button-container">
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableCoffeeBtn" (click)="coffeeAdd5()" > 
+                    5 
+                </button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableCoffeeBtn" (click)="coffeeAdd50()">
+                     50 
+                    </button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableCoffeeBtn" (click)="coffeeAdd100()">
+                    100 
+                </button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableCoffeeBtn" (click)="coffeeReset()">
+                    Reset 
+                </button>
+            </div>
+    
+            <div class="col-sm-2 ing-height">
+                <div class="ing-container d-flex align-items-center justify-content-center">
+                    <div [style.height.px]="milkHeight" class="align-self-end" id="milk-ing"></div>
+                    <span class="milk-responsive"></span>
+                    <span class="position-absolute ing-volume"> {{ milkIngredients }} </span>
+                    <span class="volume-warning position-absolute mt-4" [style.opacity]="milkAlert ? shown : hide"
+                        *ngIf="milkFull">FULL</span>
+                </div>
+            </div>
+            <div class="col-sm-1 ing-height ing-button-container">
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableMilkBtn" (click)="milkAdd5()">
+                    5
+                </button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableMilkBtn" (click)="milkAdd50()">
+                    50
+                </button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableMilkBtn" (click)="milkAdd100()">
+                    100 </button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableMilkBtn" (click)="milkReset()">
+                     Reset
+                </button>
+            </div>
+    
+            <div class="col-sm-2 ing-height">
+                <div class="ing-container d-flex align-items-center justify-content-center">
+                    <div [style.height.px]="waterHeight" class="align-self-end" id="water-ing"></div>
+                    <span class="water-responsive"></span>
+                    <span class="position-absolute ing-volume"> {{ waterIngredients }}</span>
+                    <span class="volume-warning position-absolute mt-4" [style.opacity]="waterAlert ? shown : hide"
+                        *ngIf="waterFull">FULL</span>
+                </div>
+            </div>
+            <div class="col-sm-1 ing-height ing-button-container">
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableWaterBtn" (click)="waterAdd5()">
+                    5
+                </button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableWaterBtn" (click)="waterAdd50()">
+                    50
+                    </button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableWaterBtn" (click)="waterAdd100()"> 
+                    100</button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableWaterBtn" (click)="waterReset()">
+                    Reset </button>
+            </div>
+    
+            <div class="col-sm-2 ing-height">
+                <div class="ing-container d-flex align-items-center justify-content-center">
+                    <div [style.height.px]="chocolateHeight" class="align-self-end" id="chocolate-ing"></div>
+                    <span class="chocolate-responsive"></span>
+                    <span class="position-absolute ing-volume"> {{ chocolateIngredients }}</span>
+                    <span class="volume-warning position-absolute mt-4" [style.opacity]="chocolateAlert ? shown : hide"
+                        *ngIf="chocolateFull">FULL</span>
+                </div>
+            </div>
+            <div class="col-sm-1 ing-height ing-button-container">
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableChocolateBtn"
+                    (click)="chocolateAdd5()">5</button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableChocolateBtn"
+                    (click)="chocolateAdd50()">50</button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableChocolateBtn"
+                    (click)="chocolateAdd100()">100</button>
+                <button class="add-ing-button btn btn-outline-dark" [disabled]="disableChocolateBtn"
+                    (click)="chocolateReset()"> Reset </button>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="ing-name-container text-center">COFFEE <br> <span class="ing-max-text">(max. 1000 ml)</span>
+                </div>
+            </div>
+            <div class="col-sm-2 offset-sm-1">
+                <div class="ing-name-container text-center">MILK <br> <span class="ing-max-text">(max. 1000 ml)</span></div>
+            </div>
+            <div class="col-sm-2 offset-sm-1">
+                <div class="ing-name-container text-center">WATER <br> <span class="ing-max-text">(max. 500 ml)</span></div>
+            </div>
+            <div class="col-sm-2 offset-sm-1">
+                <div class="ing-name-container text-center">CHOCOLATE <br> <span class="ing-max-text">(max. 300 ml)</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row justify-content-center mt-3" id="continue-row">
+            <button class="btn btn-light btn-outline-dark btn-lg" (click)="applyIng()" id="continue-btn" [disabled]="finishedChoosing">Continue</button>
+        </div>
+    </div>

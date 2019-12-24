@@ -1,0 +1,28 @@
+
+#canvas{
+    margin-top: 10px !important;
+}
+#responsive-menu{
+    visibility: hidden;
+    height: 0vh;
+}
+
+@media only screen and (max-width: 990px){
+    .menu-ingredients{
+        font-size: 14px;
+    }
+    .title-menu{
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    #responsive-menu{
+        visibility: visible;
+        height: auto;
+    }
+    #canvas{
+        display: none;
+    }
+    
+    
+}
