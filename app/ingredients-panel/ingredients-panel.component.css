@@ -112,6 +112,8 @@ h2{
     width: 35px;
     }
     .add-ing-button{
+    margin-left: 15px;
+    margin-bottom: 17px;
     width:  60px;
     height: 46px;
     }
@@ -141,6 +143,22 @@ h2{
     }
     #chocolate-ing{
         width: 32px;
+    }
+    .text-ing-responsive-coffee{
+        position: relative;
+        left: -64%;
+    }
+    .text-ing-responsive-milk{
+        position: relative;
+        left: -30%;
+    }
+    .text-ing-responsive-water{
+        position: relative;
+        left: 0%;
+    }
+    .text-ing-responsive-chocolate{
+        position: relative;
+        left: 38%;
     }
 
 

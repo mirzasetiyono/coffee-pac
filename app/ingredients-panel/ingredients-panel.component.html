@@ -125,8 +125,8 @@
 <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH -->
 
 <div class="container mt-3 mobile-width"> 
-        <div class="row mt-1">
-            <div class="col-sm-2 ing-height">
+        <div class="row mt-1 content-center justify-content-center">
+            <div class="col-xs-2 ing-height">
                 <div class="ing-container d-flex align-items-center justify-content-center">
                     <div [style.height.px]="coffeeHeight" class="align-self-end" id="coffee-ing"></div>
                     <span class="position-absolute ing-volume">{{ coffeeIngredients }}</span> <br>
@@ -134,7 +134,7 @@
                         *ngIf="coffeeFull">FULL</span>
                 </div>
             </div>
-            <div class="col-sm-1 ing-height ing-button-container">
+            <div class="col-xs-1 ing-height ing-button-container d-flex flex-column">
                 <button class="add-ing-button btn btn-outline-dark" [disabled]="disableCoffeeBtn" (click)="coffeeAdd5()" > 
                     5 
                 </button>
@@ -149,7 +149,7 @@
                 </button>
             </div>
     
-            <div class="col-sm-2 ing-height">
+            <div class="col-xs-2 ing-height">
                 <div class="ing-container d-flex align-items-center justify-content-center">
                     <div [style.height.px]="milkHeight" class="align-self-end" id="milk-ing"></div>
                     <span class="position-absolute ing-volume"> {{ milkIngredients }} </span>
@@ -157,7 +157,7 @@
                         *ngIf="milkFull">FULL</span>
                 </div>
             </div>
-            <div class="col-sm-1 ing-height ing-button-container">
+            <div class="col-xs-1 ing-height ing-button-container d-flex flex-column">
                 <button class="add-ing-button btn btn-outline-dark" [disabled]="disableMilkBtn" (click)="milkAdd5()">
                     5
                 </button>
@@ -171,7 +171,7 @@
                 </button>
             </div>
     
-            <div class="col-sm-2 ing-height">
+            <div class="col-xs-2 ing-height">
                 <div class="ing-container d-flex align-items-center justify-content-center">
                     <div [style.height.px]="waterHeight" class="align-self-end" id="water-ing"></div>
                     <span class="position-absolute ing-volume"> {{ waterIngredients }}</span>
@@ -179,7 +179,7 @@
                         *ngIf="waterFull">FULL</span>
                 </div>
             </div>
-            <div class="col-sm-1 ing-height ing-button-container">
+            <div class="col-xs-1 ing-height ing-button-container d-flex flex-column">
                 <button class="add-ing-button btn btn-outline-dark" [disabled]="disableWaterBtn" (click)="waterAdd5()">
                     5
                 </button>
@@ -192,7 +192,7 @@
                     Reset </button>
             </div>
     
-            <div class="col-sm-2 ing-height">
+            <div class="col-xs-2 ing-height">
                 <div class="ing-container d-flex align-items-center justify-content-center">
                     <div [style.height.px]="chocolateHeight" class="align-self-end" id="chocolate-ing"></div>
                     <span class="position-absolute ing-volume"> {{ chocolateIngredients }}</span>
@@ -200,7 +200,7 @@
                         *ngIf="chocolateFull">FULL</span>
                 </div>
             </div>
-            <div class="col-sm-1 ing-height ing-button-container">
+            <div class="col-xs-1 ing-height ing-button-container d-flex flex-column">
                 <button class="add-ing-button btn btn-outline-dark" [disabled]="disableChocolateBtn"
                     (click)="chocolateAdd5()">5</button>
                 <button class="add-ing-button btn btn-outline-dark" [disabled]="disableChocolateBtn"
@@ -212,19 +212,19 @@
             </div>
         </div>
     
-        <div class="row">
-            <div class="col-sm-2">
-                <div class="ing-name-container text-center">COFFEE <br> <span class="ing-max-text">(max. 1000 ml)</span>
+        <div class="row justify-content-center">
+            <div class="col-xs-3">
+                <div class="ing-name-container text-ing-responsive-coffee">COFFEE <br> <span class="ing-max-text">(max. 1000 ml)</span>
                 </div>
             </div>
-            <div class="col-sm-2 offset-sm-1">
-                <div class="ing-name-container text-center">MILK <br> <span class="ing-max-text">(max. 1000 ml)</span></div>
+            <div class="col-xs-3">
+                <div class="ing-name-container text-ing-responsive-milk">MILK <br> <span class="ing-max-text">(max. 1000 ml)</span></div>
             </div>
-            <div class="col-sm-2 offset-sm-1">
-                <div class="ing-name-container text-center">WATER <br> <span class="ing-max-text">(max. 500 ml)</span></div>
+            <div class="col-xs-3">
+                <div class="ing-name-container text-ing-responsive-water">WATER <br> <span class="ing-max-text">(max. 500 ml)</span></div>
             </div>
-            <div class="col-sm-2 offset-sm-1">
-                <div class="ing-name-container text-center">CHOCOLATE <br> <span class="ing-max-text">(max. 300 ml)</span>
+            <div class="col-xs-3">
+                <div class="ing-name-container text-ing-responsive-chocolate">CHOCO <br> <span class="ing-max-text">(max. 300 ml)</span>
                 </div>
             </div>
         </div>
@@ -233,3 +233,8 @@
             <button class="btn btn-light btn-outline-dark btn-lg" (click)="applyIng()" id="continue-btn" [disabled]="finishedChoosing">Continue</button>
         </div>
     </div>
+
+<!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH -->
+<!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH -->
+<!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH --> <!-- THIS IS FOR MOBILE WIDTH -->
+

@@ -50,8 +50,13 @@ h2{
     }
     #coffee-num{
         height: 38px;
+        margin-top: 8px;
         padding-right: 15px ;
         padding-left: 10px;
+    }
+
+    #selectArea{
+        margin-bottom: 10px;
     }
     
    
