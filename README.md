@@ -9,7 +9,7 @@ npm install = bootstrap 4 and jquery
 ## Features
 1. all features written in the FE Test
 2. add UI styling for better UX
-3. Responsive
+3. Responsive (600px - 1980px); not for pixels < 600, but still operate;
 
 ## Notes
 1. everything done with code, menu drawn using JS Canvas, could be better to use third-party software. But this is coding test.
