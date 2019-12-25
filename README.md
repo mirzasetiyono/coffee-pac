@@ -1,5 +1,16 @@
 # coffee-pac
 
-a coffee webapp assestment still in development phase..
+a Coffee Maker Web Aplications (Coding Test)
+framework = Angular 8
 
-Documentation still in process.. 
+## Dependencies
+npm install = bootstrap 4 and jquery
+
+## Features
+1. all features written in the FE Test
+2. add UI styling for better UX
+3. Responsive (600px - 1980px); not for pixels < 600, but still operate;
+
+## Notes
+1. everything done with code, menu drawn using JS Canvas, could be better to use third-party software. But this is coding test.
+2. see the documentation in the source code for code explanations
