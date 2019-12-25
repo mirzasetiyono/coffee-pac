@@ -3,7 +3,7 @@
 }
 #responsive-menu{
     visibility: hidden;
-    height: 0vh;
+    position: fixed;
 }
 
 @media only screen and (max-width: 990px){
@@ -18,8 +18,8 @@
     }
 
     #responsive-menu{
+        position: relative;
         visibility: visible;
-        height: auto;
     }
     #canvas{
         display: none;

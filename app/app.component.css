@@ -1,15 +1,16 @@
 .messageBox{
     position: fixed;
-    width: 300px;
+    width: 250px;
     height: 300px;
     box-shadow: 10px;
     right: 0%;
-    bottom: 60%;
+    bottom: 65%;
     border: black 4px solid;
     border-radius: 10%;
     font-size: 20px;
     opacity: 0.5;
     color: white;
+    pointer-events: none;
     background-color: #343a40;
     animation: messageBoxAnim;
     animation-duration: 4000ms;
@@ -50,9 +51,9 @@
     height: 150px;
     font-size: 12px !important;
     }
-    .message-text{
-        font-size: 16px !important;
-        margin-top: 45px;
+    .message-text{    
+    font-size: 16px !important;
+    margin-top: 45px;
     }
     h3 {
     display: none;
