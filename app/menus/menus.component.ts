@@ -24,11 +24,11 @@ export class MenusComponent implements OnInit, AfterViewInit {
   noisette = new Recipe();
   marachino = new Recipe();
 
-  // assigning objects into arrays for looping 
+  // assigning objects into arrays for draw loop 
   coffeeMenuTop: Array<Recipe> = [this.espresso, this.latte, this.americano, this.mocha, this.flatWhite];
   coffeeMenuBottom: Array<Recipe> = [this.capuccino, this.longBlack, this.noisette, this.marachino];
 
-  // arrays of coffee recipe with insufficient ingredients, receiving data through service (async)
+  // arrays of coffee recipe with insufficient ingredients, receiving data through service (async) see sendNewMenu() brew-panel.ts
   naCoffee: Array<Recipe> = [];
   // instansiate canvas rendering
   private context: CanvasRenderingContext2D;
@@ -81,7 +81,6 @@ export class MenusComponent implements OnInit, AfterViewInit {
     // getting the current ingredients async 
     this.coffeeService.getNaCoffee().subscribe(nacoffee => {
       this.naCoffee = nacoffee;
-      console.log(nacoffee);
     })
   }
 
@@ -92,16 +91,15 @@ export class MenusComponent implements OnInit, AfterViewInit {
     this.context = (this.menu.nativeElement as
       HTMLCanvasElement).getContext("2d");
     
-      // Starting (Draw all recipe and cups)
+      // Starting when app init (Draw all recipe and cups)
     this.ingredientsLoop();
     this.cupLoop(this.coffeeMenuTop.length, this.coffeeMenuBottom.length);
 
   }
 
-  // Check available recipe with the current ingredients using naCoffee, and redrawing the canvas.
+  // Check available recipe with the current ingredients using naCoffee array, and redrawing the canvas based on that.
   checkAndRedraw() {
-    for (let i = 0; i < this.naCoffee.length; i++) {
-      console.log(this.naCoffee)
+    for (let i = 0; i < this.naCoffee.length; i++) { // <== naCoffee is list of unavailable coffee
       let naCoffeeName = this.naCoffee[i].name;
       // check if naCoffee has recipe that belongs to top coffee menu
       for (let y = 0; y < this.coffeeMenuTop.length; y++) {
@@ -127,11 +125,14 @@ export class MenusComponent implements OnInit, AfterViewInit {
       this.eraseAll(); // ingredients finished
       this.ingredientsFinished(); // ingredients finished
       // this.coffeeService.toggleFinishedChoosingState(false);
-      this.coffeeService.toggleFinishedBrewingState(true);
+      setTimeout(() => {
+        this.coffeeService.toggleFinishedBrewingState(true);
+      }, 2000)
+      
     }
   }
 
-
+  // draw cup in the menu using loop
   cupLoop(topCup: number, bottomCup: number) {
     // Draw top cups (5)
     for (let i = 0, x1 = 35, x2 = 75, x3 = 250, x4 = 285, y1 = 55, y2 = 285; i < topCup; i++ , x1 += 320, x2 += 320, x3 += 320, x4 += 320) {
@@ -143,7 +144,7 @@ export class MenusComponent implements OnInit, AfterViewInit {
     }
 
   }
-
+  // draw required ingredients in the menu using loop
   ingredientsLoop() {
     // Draw top Ingredients
     for (let i = 0, x1 = 35, x2 = 160; i < this.coffeeMenuTop.length; i++ , x1 += 320, x2 += 320) {
@@ -158,21 +159,21 @@ export class MenusComponent implements OnInit, AfterViewInit {
       this.writeTitle(coffeeName, x2, 40, 250); // <== write the title with coffee name as parameter, x2 as the horizontal canvas positioning
 
       this.drawCoffee(x1, (285 - coffee), 250, coffee); // <== 285 is the bottom of the cup, coffee = ingredients multiply by 1.6 (see the top comment) positioning purpose
-      this.writeIngredients(("Coffee " + this.coffeeMenuTop[i].coffee.toString() + " ml"), x2, 285, 150, "30px Verdana"); // <== write ingredients, x2 horizontal canvas positioning
+      this.writeIngredients(("Coffee " + this.coffeeMenuTop[i].coffee.toString() + " ml"), x2, 285, 150, "30px Arial"); // <== write ingredients, x2 horizontal canvas positioning
 
       this.drawMilkSteamed(x1, ((285 - coffee) - steamedMilk), 250, steamedMilk); // simillar to top, height adjustment;
       if (steamedMilk > 1) { // <== avoid 0 ingredients displayed on UI
-        this.writeIngredients(("Milk (Steamed) " + this.coffeeMenuTop[i].steamedMilk.toString() + " ml"), x2, (285 - coffee), 150, "30px Verdana"); // <== simillar
+        this.writeIngredients(("Milk (Steamed) " + this.coffeeMenuTop[i].steamedMilk.toString() + " ml"), x2, (285 - coffee), 150, "30px Arial"); // <== simillar
       };
 
       this.drawChocolate(x1, (((285 - coffee) - steamedMilk) - chocolate), 250, chocolate); // simillar to top, height adjustment;
       if (chocolate > 1) { // <== avoid 0 ingredients displayed on UI
-        this.writeIngredients(("Chocolate " + this.coffeeMenuTop[i].chocolate.toString() + " ml"), x2, ((285 - coffee) - steamedMilk), 150, "30px Verdana"); // <== simillar
+        this.writeIngredients(("Chocolate " + this.coffeeMenuTop[i].chocolate.toString() + " ml"), x2, ((285 - coffee) - steamedMilk), 150, "30px Arial"); // <== simillar
       }
 
       this.drawWater(x1, ((((285 - coffee) - steamedMilk) - chocolate) - water), 250, water); // simillar to top, height adjustment;
       if (water > 1) { // <== avoid 0 ingredients displayed on UI
-        this.writeIngredients(("Water " + this.coffeeMenuTop[i].water.toString() + " ml"), x2, (((285 - coffee) - steamedMilk) - chocolate), 150, "30px Verdana"); // <== simillar
+        this.writeIngredients(("Water " + this.coffeeMenuTop[i].water.toString() + " ml"), x2, (((285 - coffee) - steamedMilk) - chocolate), 150, "30px Arial"); // <== simillar
       }
 
       this.drawMilkFoamed(x1, (((((285 - coffee) - steamedMilk) - chocolate) - water) - foamedMilk), 250, foamedMilk); // simillar to top, height adjustment;
@@ -193,28 +194,28 @@ export class MenusComponent implements OnInit, AfterViewInit {
       const coffeeName = this.coffeeMenuBottom[i].name;
 
       this.drawCoffee(x1, (585 - coffee), 250, coffee);
-      this.writeIngredients(("Coffee " + this.coffeeMenuBottom[i].coffee.toString() + " ml"), x2, 585, 150, "30px Verdana");
+      this.writeIngredients(("Coffee " + this.coffeeMenuBottom[i].coffee.toString() + " ml"), x2, 585, 150, "30px Arial");
 
       this.writeTitle(coffeeName, x2, 340, 250);
 
       this.drawMilkSteamed(x1, ((585 - coffee) - steamedMilk), 250, steamedMilk);
       if (steamedMilk > 1) {
-        this.writeIngredients(("Milk (Steamed) " + this.coffeeMenuBottom[i].steamedMilk.toString() + " ml"), x2, (585 - coffee), 150, "30px Verdana");
+        this.writeIngredients(("Milk (Steamed) " + this.coffeeMenuBottom[i].steamedMilk.toString() + " ml"), x2, (585 - coffee), 150, "30px Arial");
       }
 
       this.drawChocolate(x1, (((585 - coffee) - steamedMilk) - chocolate), 250, chocolate);
       if (chocolate > 1) {
-        this.writeIngredients(("Chocolate " + this.coffeeMenuBottom[i].chocolate.toString() + " ml"), x2, ((585 - coffee) - steamedMilk), 150, "30px Verdana");
+        this.writeIngredients(("Chocolate " + this.coffeeMenuBottom[i].chocolate.toString() + " ml"), x2, ((585 - coffee) - steamedMilk), 150, "30px Arial");
       }
 
       this.drawWater(x1, ((((585 - coffee) - steamedMilk) - chocolate) - water), 250, water);
       if (water > 1) {
-        this.writeIngredients(("Water " + this.coffeeMenuBottom[i].water.toString() + " ml"), x2, (((585 - coffee) - steamedMilk) - chocolate), 150, "30px Verdana");
+        this.writeIngredients(("Water " + this.coffeeMenuBottom[i].water.toString() + " ml"), x2, (((585 - coffee) - steamedMilk) - chocolate), 150, "30px Arial");
       }
 
       this.drawMilkFoamed(x1, (((((585 - coffee) - steamedMilk) - chocolate) - water) - foamedMilk), 250, foamedMilk);
       if (foamedMilk > 1) {
-        this.writeIngredients(("Milk (Foamed) " + this.coffeeMenuBottom[i].foamedMilk.toString() + " ml"), x2, ((((585 - coffee) - steamedMilk) - chocolate) - water + 5), 150, "15px Verdana");
+        this.writeIngredients(("Milk (Foamed) " + this.coffeeMenuBottom[i].foamedMilk.toString() + " ml"), x2, ((((585 - coffee) - steamedMilk) - chocolate) - water + 5), 150, "15px Arial");
       }
     }
   }
@@ -254,16 +255,16 @@ export class MenusComponent implements OnInit, AfterViewInit {
   // write coffee name blueprint
   writeTitle(coffeeName: string, xMid: number, yPos: number, width: number) {
     this.context.fillStyle = "black";
-    this.context.font = "italic 30px Verdana";
+    this.context.font = "italic 30px Arial";
     this.context.textAlign = "center";
     this.context.fillText(coffeeName, xMid, yPos, width);
   }
   // Handles writing when ingredients is finished called in checkAndRedraw()
   ingredientsFinished() {
     this.context.fillStyle = "black";
-    this.context.font = "40px Verdana"
+    this.context.font = "40px Arial"
     this.context.fillText("You dont have enough ingredients to brew coffee", 800, 200, 1000);
-    this.context.fillText("Press reset to restart", 800, 270, 1000);
+    this.context.fillText("refresh page to restart", 800, 270, 1000);
   }
   // erase whole canvas
   eraseAll() {

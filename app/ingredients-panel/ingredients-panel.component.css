@@ -1,3 +1,7 @@
+h2{
+    margin-top: 4px;
+}
+
 .ing-height{
     height: 200px !important;
 }
@@ -8,8 +12,8 @@
 }
 
 .ing-container{
-    width: 100px;
-    height: 203px;
+    width: 100.5px;
+    height: 202.5px;
     position: relative;
     left: 20%;
     right: 20%;
@@ -125,7 +129,6 @@
     .ing-volume{
     font-size: 13px;
     }
-
 
     #milk-ing{
         width: 32px;

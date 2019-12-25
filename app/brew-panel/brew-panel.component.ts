@@ -5,6 +5,7 @@ import { CoffeeService } from "../service/coffee.service";
 import { BrewList } from "../models/brew-list";
 
 import { Recipe } from "../models/recipe";
+
 import { EventEmitter } from '@angular/core';
 
 
@@ -33,6 +34,7 @@ export class BrewPanelComponent implements OnInit {
 
   // boolean for disabling brew button when ing finishes
   finishedBrewing: boolean = false;
+
   // Boolean for input error handling (styling)
   isError: boolean = false;
   errortrue = "red"
@@ -60,7 +62,6 @@ export class BrewPanelComponent implements OnInit {
   ngOnInit() {
 
   }
-
   constructor(private coffeeService: CoffeeService) {
     this.coffeeService.getFinishedChoosingState().subscribe(state => {
       this.finishedChoosing = state;
@@ -123,10 +124,10 @@ export class BrewPanelComponent implements OnInit {
     });
   }
 
-  
+  // validate user input, then brew
   brewCoffee() {
     if (this.selectedCoffee === "" || this.selectedQuantity < 1){
-      this.inputWarning()
+      alert("input coffee and quantity!")
     } else {
       this.processBrewingCoffee()
     }
@@ -154,7 +155,7 @@ export class BrewPanelComponent implements OnInit {
         list.steamedMilkUsed = this.coffeeMenu[i].steamedMilk * list.quantity;
         list.waterUsed = this.coffeeMenu[i].water * list.quantity;
         list.chocolateUsed = this.coffeeMenu[i].chocolate * list.quantity;
-        // Checking if the ingredients sufficient or not for the order list
+        // Checking if the ingredients is sufficient 
         if (
           this.coffeeIngredients - tempRecipe.coffee > -1 &&
           this.milkIngredients - (tempRecipe.steamedMilk + tempRecipe.foamedMilk) > -1 &&
@@ -173,7 +174,7 @@ export class BrewPanelComponent implements OnInit {
     }
   }
 
-  // Method for counting the remaining ingredients, called on brew function
+  // Method for counting the remaining ingredients, called on processBrewingCoffee()
   countIngredients(coffeeUsed: number, foamedMilkUsed: number, steamedMilkUsed: number, waterUsed: number, chocolateUsed: number) {
     this.coffeeIngredients -= coffeeUsed;
     this.milkIngredients -= (foamedMilkUsed + steamedMilkUsed);
@@ -182,7 +183,7 @@ export class BrewPanelComponent implements OnInit {
     this.coffeeService.sendIngredients(this.coffeeIngredients, this.milkIngredients, this.waterIngredients, this.chocolateIngredients);
   }
 
-  // checking the current ingredients with current recipe
+  // checking the current ingredients with current recipe and send it to coffee service, then forward to menus component for redrawing
   sendNewMenu() {
     let na;
     let naList = [];
@@ -200,36 +201,26 @@ export class BrewPanelComponent implements OnInit {
   }
   // processing method to process the ordered coffee and styling.
   processing(pushedList) {
-    this.brewing = !this.brewing;
+    this.brewing = !this.brewing; // <== style the brewing for 1000ms
+
     setTimeout(() => {
-      this.brewing = !this.brewing;
+      this.brewing = !this.brewing; // <== style the brewing for 1000ms
       this.reDrawCanvas(); // <== redraw canvas in menu component
       this.brewList.push(pushedList) // <== pushing ordered coffee into cofffee list
+      this.coffeeService.toggleBrewingSuccessState(true); // <== change message to "brewing succeed" after brewing coffee
     }, 1000)
-    this.coffeeService.toggleFinishedChoosingState(false); // <== change state for message box change display
-    this.coffeeService.toggleBrewingSuccessState(true); // <== change state for message box change display
+
+    this.coffeeService.toggleFinishedChoosingState(false); // <== Undisplay the brewing state message
+
     setTimeout(() => {
-      this.coffeeService.toggleFinishedChoosingState(false); // <== change state for message box change display
-      this.coffeeService.toggleBrewingSuccessState(false); // <== change state for message box change display
-    }, 2000)
+      this.coffeeService.toggleBrewingSuccessState(false); // <== Undisplay the brewing succeed message after 2000ms
+    }, 2500)
   }
-  // reDraw canvas in menu component
+  // reDraw canvas look checkAndRedraw() in menu-component.ts
   reDrawCanvas() {
     this.event.emit(null);
   }
-  // alert user that input is incorrect
-  inputWarning(){
-    console.log("error")
-    let dim = setInterval(() => {
-      this.isError = true;
-      console.log(this.isError)
-      this.isError = false;
-      console.log(this.isError)
-    }, 200)
-    setTimeout(() => {
-      clearInterval(dim);
-    }, 1200)
-  }
+  // this component wasnt fetch finishedbrewingstate, finishedbrewingstate will be fetch after no coffee can be made for disabling the brew button. cant use finished choosing because it will mess the message box in app component
   checkBrewingStatus(){
     if (this.coffeeIngredients < 30){
       if (this.milkIngredients < 70){

@@ -73,51 +73,51 @@ export class IngredientsPanelComponent implements OnInit {
 
   // Finish choosing ingredients and continue to brewing step
   applyIng() {
-    this.coffeeService.sendIngredients(this.coffeeIngredients, this.milkIngredients, this.waterIngredients, this.chocolateIngredients); // <== send ingredients to another components
+    this.coffeeService.sendIngredients(this.coffeeIngredients, this.milkIngredients, this.waterIngredients, this.chocolateIngredients); // <== send updated ingredients to another components
     this.coffeeService.toggleJustStartedState(false); // <== finishing just started state
-    this.coffeeService.toggleFinishedChoosingState(true); // <== change the state in service from choosing ingredients to BREWING
+    this.coffeeService.toggleFinishedChoosingState(true); // <== change the state finishedchoosing to true
     this.undisplayFull(); // <== undisplay "full" warning from all ingredients containers
-    this.disableIngredientsBtn(); // <== Disable all modify ingredients buttons
-    let toggling = this.coffeeService.getFinishedChoosingState().subscribe(fcs => {
+    this.disableIngredientsBtn(); // <== Disable all add / reset ingredients buttons
+    let toggling = this.coffeeService.getFinishedChoosingState().subscribe(fcs => { // <== get finishedchoosing state
       this.finishedChoosing = fcs;
     })
     setTimeout(() => {
-      toggling.unsubscribe();
+      toggling.unsubscribe(); // <== close the subsription, avoid heading content changes to "fill ingredients"
     }, 500)
-    // calling function in brew component and brew component will send recipe that cant be made to service then menu panel
+ 
     // this is for handling  0 input of ingredients
-    this.myEvent.emit(null);
-    this.showSuggest = false;
+    this.myEvent.emit(null); // <== call functions other components: brewPanel.sendNewMenu(); menuPanel.checkAndRedraw(); toggleTransformMessage()
+    this.showSuggest = false; // <== undisplay suggestion text
   }
 
   ///////// SEE THE CHECK FUNCTION COMMENTS AT THE BOTTOM //////////////
 
-  // Coffee ingredients additions buttons
+  // Coffee ingredients add / remove buttons
   coffeeAdd5() {
     if (this.coffeeIngredients < 996) {
       this.coffeeIngredients = this.coffeeIngredients + 5;
       this.coffeeHeight = this.coffeeHeight + 1;
-      this.coffeeCheck();
-    } this.coffeeCheck();
+      this.coffeeCheck(); // <== check if full
+    } this.coffeeCheck(); // <== check if full
   }
   coffeeAdd50() {
     if (this.coffeeIngredients < 951) {
       this.coffeeIngredients = this.coffeeIngredients + 50;
       this.coffeeHeight = this.coffeeHeight + 10;
-      this.coffeeCheck();
-    } this.coffeeCheck();
+      this.coffeeCheck(); // <== check if full
+    } this.coffeeCheck(); // <== check if full
   }
   coffeeAdd100() {
     if (this.coffeeIngredients < 901) {
       this.coffeeIngredients = this.coffeeIngredients + 100;
       this.coffeeHeight = this.coffeeHeight + 20;
-      this.coffeeCheck();
-    } this.coffeeCheck();
+      this.coffeeCheck(); // <== check if full
+    } this.coffeeCheck(); // <== check if full
   }
   coffeeReset() {
     this.coffeeIngredients = 0;
     this.coffeeHeight = 0;
-    this.coffeeCheck();
+    this.coffeeCheck(); // <== undisplay "full" text
   }
 
   // Milk ingredients additions buttons
@@ -125,27 +125,27 @@ export class IngredientsPanelComponent implements OnInit {
     if (this.milkIngredients < 996) {
       this.milkIngredients = this.milkIngredients + 5;
       this.milkHeight = this.milkHeight + 1;
-      this.milkCheck();
-    } this.milkCheck();
+      this.milkCheck(); // <== check if full
+    } this.milkCheck(); // <== check if full
   }
   milkAdd50() {
     if (this.milkIngredients < 951) {
       this.milkIngredients = this.milkIngredients + 50;
       this.milkHeight = this.milkHeight + 10;
-      this.milkCheck();
-    } this.milkCheck();
+      this.milkCheck(); // <== check if full
+    } this.milkCheck(); // <== check if full
   }
   milkAdd100() {
     if (this.milkIngredients < 901) {
       this.milkIngredients = this.milkIngredients + 100;
       this.milkHeight = this.milkHeight + 20;
-      this.milkCheck();
-    } this.milkCheck();
+      this.milkCheck(); // <== check if full
+    } this.milkCheck(); // <== check if full
   }
   milkReset() {
     this.milkIngredients = 0;
     this.milkHeight = 0;
-    this.milkCheck();
+    this.milkCheck(); // <== undisplay "full" text
   }
 
   // Water ingredients additions buttons
@@ -153,27 +153,27 @@ export class IngredientsPanelComponent implements OnInit {
     if (this.waterIngredients < 496) {
       this.waterIngredients = this.waterIngredients + 5;
       this.waterHeight = this.waterHeight + 2;
-      this.waterCheck();
-    } this.waterCheck();
+      this.waterCheck(); // <== check if full
+    } this.waterCheck(); // <== check if full
   }
   waterAdd50() {
     if (this.waterIngredients < 451) {
       this.waterIngredients = this.waterIngredients + 50;
       this.waterHeight = this.waterHeight + 20;
-      this.waterCheck();
-    } this.waterCheck();
+      this.waterCheck(); // <== check if full
+    } this.waterCheck(); // <== check if full
   }
   waterAdd100() {
     if (this.waterIngredients < 401) {
       this.waterIngredients = this.waterIngredients + 100;
       this.waterHeight = this.waterHeight + 40;
-      this.waterCheck();
-    } this.waterCheck();
+      this.waterCheck(); // <== check if full
+    } this.waterCheck(); // <== check if full
   }
   waterReset() {
     this.waterIngredients = 0;
     this.waterHeight = 0;
-    this.waterCheck();
+    this.waterCheck(); // <== undisplay "full" text
   }
 
   // Chocolate ingredients additions buttons
@@ -181,32 +181,32 @@ export class IngredientsPanelComponent implements OnInit {
     if (this.chocolateIngredients < 296) {
       this.chocolateIngredients = this.chocolateIngredients + 5;
       this.chocolateHeight = this.chocolateHeight + 3.33;
-      this.chocolateCheck();
-    } this.chocolateCheck();
+      this.chocolateCheck(); // <== check if full
+    } this.chocolateCheck(); // <== check if full
   }
   chocolateAdd50() {
     if (this.chocolateIngredients < 251) {
       this.chocolateIngredients = this.chocolateIngredients + 50;
       this.chocolateHeight = this.chocolateHeight + 33.3;
-      this.chocolateCheck();
-    } this.chocolateCheck();
+      this.chocolateCheck(); // <== check if full
+    } this.chocolateCheck(); // <== check if full
   }
   chocolateAdd100() {
     if (this.chocolateIngredients < 201) {
       this.chocolateIngredients = this.chocolateIngredients + 100;
       this.chocolateHeight = this.chocolateHeight + 66.6;
-      this.chocolateCheck();
-    } this.chocolateCheck();
+      this.chocolateCheck(); // <== check if full
+    } this.chocolateCheck(); // <== check if full
   }
   chocolateReset() {
     this.chocolateIngredients = 0;
     this.chocolateHeight = 0;
-    this.chocolateCheck();
+    this.chocolateCheck(); // <== undisplay "full" text
   }
 
   // This part is a bit messy (cant get get the interval and timeout inside a function)
 
-  // check if the coffee ingrdients reach 1000
+  // check if the coffee ingrdients reach 1000 and alert in UI
   coffeeCheck() {
     if (this.coffeeIngredients === 1000) {
       this.coffeeFull = true; // <== Displaying "full" (see HTML) event binding
@@ -293,7 +293,7 @@ export class IngredientsPanelComponent implements OnInit {
         this.showSuggest = true;
       } 
   }
-  // undisplay "full text" in ingredients container
+  // undisplay "full" text in ingredients container
   undisplayFull(){
     this.coffeeFull = false; // <== undisplay full text
     this.milkFull = false; // <== undisplay full text

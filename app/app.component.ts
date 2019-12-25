@@ -2,7 +2,6 @@ import { Component, AfterViewInit } from '@angular/core';
 
 import { CoffeeService } from './service/coffee.service'
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,12 +22,7 @@ export class AppComponent {
     this.coffeeService.getFinishedBrewingState().subscribe(fbs => {
       this.finishedBrewing = fbs;
     })
-    console.log(this.justStarted);
-    console.log(this.finishedChoosing);
-    console.log(this.brewingSuccess);
-    console.log(this.finishedBrewing);
   }
-
 
   ngAfterViewInit(){
   }
@@ -40,7 +34,6 @@ export class AppComponent {
       this.transformMessage = true;
     }, 100)
   }
-
   transformMessage: boolean = true;
   // app state for message box
   justStarted: boolean;

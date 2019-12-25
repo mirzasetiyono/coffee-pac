@@ -1,4 +1,4 @@
-<div class="container-fluid mb-3 border border-bottom border-dark">
+<div class="container-fluid mb-3 border border-bottom border-dark bg-dark text-light">
     <div class="row text-center content-center justify-content-center">
         <h2 *ngIf="!finishedChoosing">FILL INGREDIENTS</h2>
         <h2 *ngIf="finishedChoosing">CURRENT INGREDIENTS</h2>
@@ -129,7 +129,6 @@
             <div class="col-sm-2 ing-height">
                 <div class="ing-container d-flex align-items-center justify-content-center">
                     <div [style.height.px]="coffeeHeight" class="align-self-end" id="coffee-ing"></div>
-                    <span class="coffee-responsive"></span>
                     <span class="position-absolute ing-volume">{{ coffeeIngredients }}</span> <br>
                     <span class="volume-warning position-absolute mt-4" [style.opacity]="coffeeAlert ? shown : hide"
                         *ngIf="coffeeFull">FULL</span>
@@ -153,7 +152,6 @@
             <div class="col-sm-2 ing-height">
                 <div class="ing-container d-flex align-items-center justify-content-center">
                     <div [style.height.px]="milkHeight" class="align-self-end" id="milk-ing"></div>
-                    <span class="milk-responsive"></span>
                     <span class="position-absolute ing-volume"> {{ milkIngredients }} </span>
                     <span class="volume-warning position-absolute mt-4" [style.opacity]="milkAlert ? shown : hide"
                         *ngIf="milkFull">FULL</span>
@@ -176,7 +174,6 @@
             <div class="col-sm-2 ing-height">
                 <div class="ing-container d-flex align-items-center justify-content-center">
                     <div [style.height.px]="waterHeight" class="align-self-end" id="water-ing"></div>
-                    <span class="water-responsive"></span>
                     <span class="position-absolute ing-volume"> {{ waterIngredients }}</span>
                     <span class="volume-warning position-absolute mt-4" [style.opacity]="waterAlert ? shown : hide"
                         *ngIf="waterFull">FULL</span>
@@ -198,7 +195,6 @@
             <div class="col-sm-2 ing-height">
                 <div class="ing-container d-flex align-items-center justify-content-center">
                     <div [style.height.px]="chocolateHeight" class="align-self-end" id="chocolate-ing"></div>
-                    <span class="chocolate-responsive"></span>
                     <span class="position-absolute ing-volume"> {{ chocolateIngredients }}</span>
                     <span class="volume-warning position-absolute mt-4" [style.opacity]="chocolateAlert ? shown : hide"
                         *ngIf="chocolateFull">FULL</span>
